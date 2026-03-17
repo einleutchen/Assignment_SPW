@@ -1,0 +1,29 @@
+# to pull the copy of all files in repository to local branch
+git clone git@github.com:einleutchen/Assignment_SPW.git
+
+# check which remote repository
+git remote -v
+
+# check which branch you are in, denoted by *
+git branch
+
+# create and move to new branch using git checkout
+git checkout -b uyen 
+
+# create and move to new branch using git switch
+git switch -c uyen
+
+# go to your branch and add file
+git add file.txt
+
+# check the status
+git status
+
+# commit the file
+git commit -m "Add file"
+
+# to push your change to remote repository
+git push 
+# or
+git push --set-upstream origin uyen
+
