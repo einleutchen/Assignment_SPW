@@ -84,7 +84,9 @@ Visualize merge in git
   
 * Git rebase forces you to resolve conflicts iteratively, one commit at a time, as it replays your branch's history. When conflicts arise during rebase, Git stops at each problematic commit and requires you to **resolve conflicts before continuing to the next commit**. However, rebase's conflict resolution can become tedious for long-running feature branches. You might encounter the same conflict multiple times if similar changes were made across several commits, requiring repeated resolution of essentially identical problems.
  
-<center><img width="800" height="600" src="rebase1_new.png"></center>
+<p align="center" width="70%">
+    <img width="50%" src="rebase1_new.png"> 
+</p>
 
 Visualize rebase in git
 
