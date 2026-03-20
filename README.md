@@ -1,46 +1,135 @@
-# Branch merge,rebase & switch
-This is the project for SPW lecture
-
-## What is Branch?
-In Git, a branch is a lightweight, movable pointer to a commit. Instead of copying all files, Git simply tracks where your work diverges from
-the main line. It represents an independent line of development. Unlike older version control systems, Git does not copy all your files when
-you create a branch. Instead, it simply remembers which commit you are currently working on. This makes branching in Git  fast and "cheap" in
-terms of storage. 
-
-<p align="center" width="100%">
-    <img width="50%" src="branch1_new.png"> 
-</p>
-
-- The HEAD Pointer: Git uses a special pointer called HEAD to track the current branch you are working on. When switch branches, HEAD moves
-to the new branch pointer.
-- Efficient Storage: Git only stores the differences between branches. Identical files are shared, meaning branching costs almost no disk 
-space and is nearly instantaneous.
-
-## Purpose: Isolation & Safety
-The primary goal of branching is isolation. It allows for:
-
-- Independent Development: Changes made in a branch do not affect the main project until they are intentionally merged.
-- Stability: The main line of development (usually called main) remains stable and deployable, while experimental or incomplete code is kept separate.
-- Risk Management: If a feature or an experiment fails, the branch can be deleted without any impact on the rest of the project.
-
-## The "Feature Branch" Workflow
-
-<p align="center" width="100%">
-    <img width="65%" src="branch2_new.png"> 
-</p>
-
-This is the industry-standard strategy for working in teams:
-
-- Task-Oriented: A dedicated branch is created for every new task (e.g., a new feature, a bug fix, or a UI update).
-- Quality Control:  This ensures that the main branch only contains tested, production-ready code.
-- Parallel Work: It facilitates collaboration, as multiple developers can work on different tasks simultaneously without interfering with 
-each other.
-
-### Essential Commands for Branch Management
-`git branch` – Lists all existing branches in the repository
-`git branch NAME` – Creates a new branch at the current commit
-`git checkout NAME` – Switches the working directory to the specified branch
-`git checkout -b NAME` – A combined command to create and switch to a new branch immediately
-`git push origin NAME` – Uploads the local branch to a remote server (GitHub)
-
-
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "0d8019d5-feea-4163-8fa0-74da977014e0",
+   "metadata": {},
+   "source": [
+    "## Git branch\n",
+    "Source: [basic-git-branching](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging), [how-to-use-branches](https://www.atlassian.com/git/tutorials/using-branches), [branching-in-a-nutshell](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell), [git-tutorial](https://git-scm.com/docs/gittutorial)\n",
+    "\n",
+    "## What is Branch?\n",
+    "* In Git, a branch is a **lightweight, movable pointer to a commit**. When you create a branch, you create a new pointer. The default branch name in Git is master (or main on Github). As you start making commits, you're given a main branch that points to the last commit you made. Every time you commit, the main branch pointer moves forward automatically.\n",
+    "* Instead of copying all files, Git simply tracks where your work diverges from the main line. It represents an independent line of development. Unlike older version control systems, Git does not copy all your files when you create a branch. Instead, it simply remembers which commit you are currently working on. This makes branching in Git  fast and \"cheap\" in terms of storage. <center><img width=\"400\" height=\"400\" src=\"branch1_new.png\"></center>\n",
+    "The HEAD Pointer: Git uses a special pointer called HEAD to track the current branch you are working on. When switch branches, HEAD moves\n",
+    "to the new branch pointer.\n",
+    "- Efficient Storage: Git only stores the differences between branches. Identical files are shared, meaning branching costs almost no disk \n",
+    "space and is nearly instantaneous.\n",
+    "\n",
+    "## Purpose: Isolation & Safety\n",
+    "The primary goal of branching is isolation. It allows for:\n",
+    "\n",
+    "- Independent Development: Changes made in a branch do not affect the main project until they are intentionally merged.\n",
+    "- Stability: The main line of development (usually called main) remains stable and deployable, while experimental or incomplete code is kept separate.\n",
+    "- Risk Management: If a feature or an experiment fails, the branch can be deleted without any impact on the rest of the project.\n",
+    "\n",
+    "## The \"Feature Branch\" Workflow\n",
+    "\n",
+    "This is the industry-standard strategy for working in teams:\n",
+    "\n",
+    "- Task-Oriented: A dedicated branch is created for every new task (e.g., a new feature, a bug fix, or a UI update).\n",
+    "- Quality Control:  This ensures that the main branch only contains tested, production-ready code.\n",
+    "- Parallel Work: It facilitates collaboration, as multiple developers can work on different tasks simultaneously without interfering with \n",
+    "each other.\n",
+    "\n",
+    "Example:\n",
+    "1. You can always create a branch (Collab1) from an existing branch (main). Main and Collab1 contain the same commits A, B and run.py\n",
+    "2. You can then work on this new branch in isolation from changes that other people are making to the repository and in parallel with others in that repository. Main commits: A, B, run.py, C, and E; Collab1 commits: A, B, run.py, D, and F.\n",
+    "\n",
+    "<center><img width=\"600\" height=\"500\" src=\"branch2_new.png\"></center>\n",
+    "\n",
+    "### Essential Commands for Branch Management\n",
+    "`git branch` – Lists all existing branches in the repository\n",
+    "\n",
+    "`git branch NAME` – Creates a new branch at the current commit\n",
+    "\n",
+    "`git checkout NAME` – Switches the working directory to the specified branch\n",
+    "\n",
+    "`git checkout -b NAME` – A combined command to create and switch to a new branch immediately\n",
+    "\n",
+    "`git push origin NAME` – Uploads the local branch to a remote server (GitHub)\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d53531ee-a5d1-4835-bae6-28599cd82f36",
+   "metadata": {},
+   "source": [
+    "## Git rebase\n",
+    "\n",
+    "Source: [merge-vs-rebase](https://www.atlassian.com/git/tutorials/merging-vs-rebasing), [merge-rebase-pros-and-cons](https://www.datacamp.com/blog/git-merge-vs-git-rebase) [git-merge-history](https://stackoverflow.com/questions/48814114/git-history-for-branch-after-merge), [visualize-git-log](https://redfin.engineering/visualize-merge-history-with-git-log-graph-first-parent-and-no-merges-c6a9b5ff109c)\n",
+    "\n",
+    "The first thing to understand about **`git rebase`** is that it solves the same problem as **`git merge`**. Both of these commands are designed to integrate changes from one branch into another branch—they just do it in very different ways.\n",
+    "\n",
+    "<left><img width=\"300\" height=\"300\" src=\"branch.png\"></left>\n",
+    "\n",
+    "* **`Git merge`** creates a new commit that combines changes from two branches while preserving the original commit history of both branches. Merge **maintains the chronological timeline of development without altering existing commits** (non-destructive integration), showing when features were actually integrated. This approach shines in collaborative environments where multiple developers work on the same codebase at the same time. You can see exactly when features were developed, who worked on what, and how different branches evolved over time. It preserves valuable context, but also **increases the visual complexity of the project history**.\n",
+    "  \n",
+    "* Git merge presents all **conflicts at once in a single resolution session**. Git identifies every conflicting file and marks all problematic sections at the same time, which allows you to see the complete scope of integration challenges upfront. However, complex merges with many conflicts can become overwhelming. You might find yourself resolving dozens of conflicting files in a single session, making it easy to miss subtle integration issues or introduce new bugs during the resolution process.\n",
+    "\n",
+    "<center><img width=\"700\" height=\"500\" src=\"merge1_new.png\"></center>\n",
+    "\n",
+    "Visualize merge in git\n",
+    "\n",
+    "<left><img width=\"500\" height=\"500\" src=\"merge2.png\"></left>\n",
+    "\n",
+    "<left><img width=\"500\" height=\"500\" src=\"merge.png\"></left>\n",
+    "\n",
+    "* **`Git rebase`**, on the other hand, instead of creating merge commits, rebase **moves your entire feature branch to start from the latest commit of your target branch**. This process involves **historical revision** where Git temporarily removes your commits, updates the base branch, and then reapplies your changes one by one. **Each commit gets a new SHA hash, effectively creating new commits that contain the same changes but with different parent relationships**. Rebase creates a linear, cleaned-up history that appears as if all changes were made sequentially. This approach works exceptionally well for private branches where you're the only developer making changes. However, rebasing public branches on which others have based their work can **create serious coordination problems and duplicate commits in your shared history**. Git will think that your main branch’s history has diverged from everybody else’s; moreover, when you rebase, you're **changing commit SHA hashes**, which means **other developers' branches will no longer have the correct parent commits**. This forces team members to perform complex recovery operations or potentially lose their work when they try to merge their changes. The golden rule of git rebase is to **never use it on public branches**.\n",
+    "  \n",
+    "* Git rebase forces you to resolve conflicts iteratively, one commit at a time, as it replays your branch's history. When conflicts arise during rebase, Git stops at each problematic commit and requires you to **resolve conflicts before continuing to the next commit**. However, rebase's conflict resolution can become tedious for long-running feature branches. You might encounter the same conflict multiple times if similar changes were made across several commits, requiring repeated resolution of essentially identical problems.\n",
+    " \n",
+    "<center><img width=\"800\" height=\"600\" src=\"rebase1_new.png\"></center>\n",
+    "\n",
+    "Visualize rebase in git\n",
+    "\n",
+    "**auto-rebase**\n",
+    "\n",
+    "`$ git checkout rebase`\n",
+    "\n",
+    "`$ git rebase master`\n",
+    "\n",
+    "<left><img width=\"500\" height=\"500\" src=\"rebase.png\"></left>\n",
+    "\n",
+    "**interactive rebase** (change the order of the commit in text editor)\n",
+    "\n",
+    "`$ git checkout rebase`\n",
+    "\n",
+    "`$ git rebase master`\n",
+    "\n",
+    "switch third and fifth commit in text editor\n",
+    "```\n",
+    "pick ae7e3180 fifth commit - add feature2\n",
+    "pick 0988efbe third commit - add feature1\n",
+    "```\n",
+    "<left><img width=\"600\" height=\"500\" src=\"rebase2.png\"></left>\n",
+    "\n",
+    "\n",
+    "### \n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.10.12"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
