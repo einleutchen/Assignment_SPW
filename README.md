@@ -117,29 +117,33 @@ pick 0988efbe third commit - add feature1
 </p>
 
 ## git switch
-Git 2.23 brings few new commands: `git switch`** and `git restore`**. These two are meant to eventually provide a better user experience for the `git checkout`** functionality. The new operations are dividing checkout into 2 subcommand types: commands which change branches and operations which change files. So that makes switch easier to understand and use.
+Git 2.23 brings few new commands: `git switch**` and `git restore**`. These two are meant to eventually provide a better user experience for the `git checkout**` functionality. The new operations are dividing checkout into 2 subcommand types: commands which change branches and operations which change files. So that makes switch easier to understand and use.
 
 ### Go through example:
-We have 2 branches in the repo: main & branch1
--The following command switches from "main" to the "branch1" branch:
+We have multiple branches in the repo.
+-The following command switches from one branch to another branch:
 
-`git switch branch1`
+`git switch <branch>`
 
--After working in the wrong branch, creating new branch and switching to it would be done using (as replacecement for git checkout --branch (or git checkout -b, for short)), we can write:
+-After working in the wrong branch, restoring to the original state 
 
-`git switch -c branch2`
+`git restore <branch>`
+
+creating new branch and switching to it would be done using (as replacecement for `git checkout --branch` (or `git checkout -b`, for short)), we can write:
+
+`git switch -c <new_branch>`
 
 where -c or -C is short for --create
 
-To switch back to the previous branch before we switched to branch2 (i.e. "branch1" branch):
+To switch back to the previous branch before we switched to new branch:
+
 `git switch -`
 
-You can grow a new branch from any commit(starting point). Specifying a <start-point> allows you to create a branch based on some other point in history than where HEAD currently points. For example, switch to "HEAD~3" and create branch "branch3":
+You can grow a new branch from any commit(starting point). Specifying a <start-point> allows you to create a branch based on some other point in history than where HEAD currently points. For example, switch to "HEAD~2" and create new branch out of it:
 
-`git switch -c branch3 HEAD~2`
-Switched to a new branch 'branch3'
+`git switch -c <new_branch> HEAD~2`
 
-To check out commit HEAD~3 for temporary inspection or experiment without creating a new branch:
+To check out commit HEAD~2 for temporary inspection or experiment without creating a new branch:
 
 `git switch --detach HEAD~3`
 HEAD is now at 9fc9555312 Merge branch 'cc/shared-index-permbits'
@@ -150,12 +154,12 @@ If it turns out whatever you have done is worth keeping, you can always create a
 
 Recovering a branch which was accidentaly deleted:
 
-`git branch -d branch3`
-`git switch -c branch3 {hash id of deleted branch}`
+`git branch -d <branch>`
+`git switch -c <deleted_branch> {hash id of deleted branch}`
 
 Using orphan mode
-Creating branches with no history - creating branch4
-`git switch --orphan branch4`
+Creating branches with no history:
+`git switch --orphan <branch>`
 
 We get totally clean branch, no previous commits,no files. Useful for starting new projects in the same repo, creating documentation only branch(clean history dedicated to documents), used by web developers for static complied(ready to show files without compiling them) files only, not entire code.
 
