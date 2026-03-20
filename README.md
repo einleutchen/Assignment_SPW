@@ -6,7 +6,7 @@ Source: [basic-git-branching](https://git-scm.com/book/en/v2/Git-Branching-Basic
 * Instead of copying all files, Git simply tracks where your work diverges from the main line. It represents an independent line of development. Unlike older version control systems, Git does not copy all your files when you create a branch. Instead, it simply remembers which commit you are currently working on. This makes branching in Git  fast and "cheap" in terms of storage. 
 
 <p align="center" width="70%">
-    <img width="30%" src="branch1_new.png"> 
+    <img width="50%" src="branch1_new.png"> 
 </p>
 
 The HEAD Pointer: Git uses a special pointer called HEAD to track the current branch you are working on. When switch branches, HEAD moves
@@ -34,8 +34,8 @@ Example:
 1. You can always create a branch (Collab1) from an existing branch (main). Main and Collab1 contain the same commits A, B and run.py
 2. You can then work on this new branch in isolation from changes that other people are making to the repository and in parallel with others in that repository. Main commits: A, B, run.py, C, and E; Collab1 commits: A, B, run.py, D, and F.
 
-<p align="center" width="70%">
-    <img width="50%" src="branch2_new.png"> 
+<p align="center" width="80%">
+    <img width="70%" src="branch2_new.png"> 
 </p>
 
 
@@ -56,7 +56,7 @@ Source: [merge-vs-rebase](https://www.atlassian.com/git/tutorials/merging-vs-reb
 
 The first thing to understand about **`git rebase`** is that it solves the same problem as **`git merge`**. Both of these commands are designed to integrate changes from one branch into another branch—they just do it in very different ways.
 
-<p align="left" width="70%">
+<p align="left" width="50%">
     <img width="50%" src="branch.png"> 
 </p>
 
@@ -64,8 +64,8 @@ The first thing to understand about **`git rebase`** is that it solves the same 
   
 * Git merge presents all **conflicts at once in a single resolution session**. Git identifies every conflicting file and marks all problematic sections at the same time, which allows you to see the complete scope of integration challenges upfront. However, complex merges with many conflicts can become overwhelming. You might find yourself resolving dozens of conflicting files in a single session, making it easy to miss subtle integration issues or introduce new bugs during the resolution process.
 
-<p align="center" width="70%">
-    <img width="50%" src="merge1_new.png"> 
+<p align="center" width="80%">
+    <img width="70%" src="merge1_new.png"> 
 </p>
 
 
@@ -84,8 +84,8 @@ Visualize merge in git
   
 * Git rebase forces you to resolve conflicts iteratively, one commit at a time, as it replays your branch's history. When conflicts arise during rebase, Git stops at each problematic commit and requires you to **resolve conflicts before continuing to the next commit**. However, rebase's conflict resolution can become tedious for long-running feature branches. You might encounter the same conflict multiple times if similar changes were made across several commits, requiring repeated resolution of essentially identical problems.
  
-<p align="center" width="70%">
-    <img width="50%" src="rebase1_new.png"> 
+<p align="center" width="80%">
+    <img width="70%" src="rebase1_new.png"> 
 </p>
 
 Visualize rebase in git
